@@ -7,9 +7,19 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
+    <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
+
+    @*IE11 and Edge bugs*@
+    @*https://metroui.org.ua/app-bar.html*@
+    <style>
+        .app-bar-menu li {
+            list-style: none !important;
+        }
+    </style>
+
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -28,17 +38,39 @@
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
+    </div>*@
+
+    <div class="app-bar-expand-md" data-role="appbar">
+
+        @*We will need to hide/show menu(s) as needed using C#*@
+        <ul class="app-bar-menu">
+            <li><a href="#"><span class="mif-home mif-lg"></span></a></li>
+            <li>@Html.ActionLink("Dashboard", "SalesDashboard", "Home")</li> @*We will need to create more Dashboard links for other users*@
+            <li>@Html.ActionLink("Constumers", "Constumers", "Home")</li>
+            <li>@Html.ActionLink("Search", "Search", "Home")</li>
+            <li>@Html.ActionLink("Add Vehicle", "AddVehicle", "Home")</li>
+            <li>@Html.ActionLink("Add Employee", "AddEmployee", "Home")</li>
+        </ul>
+        <ul class="app-bar-menu">
+            <li>@Html.ActionLink("Sign In/Out", "Sign", "Home")</li>
+        </ul>
+        <br />
     </div>
+   
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Dealearship</p>
         </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    <!-- jQuery first, then Metro UI JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
 </body>
 </html>
